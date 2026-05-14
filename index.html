@@ -1458,3 +1458,1427 @@ window.addEventListener('scroll', () => {
 </script>
 </body>
 </html>
+  --border: rgba(0,0,0,0.08);
+  --border-accent: rgba(37,99,235,0.2);
+  --text: #0a1628;
+  --text-secondary: #475569;
+  --text-light: #1e293b;
+  --accent: #2563eb;
+  --sky: #0369a1;
+  --nav-bg: rgba(240,244,248,0.95);
+  --footer-bg: #1e293b;
+  --grid-color: rgba(37,99,235,0.04);
+  --watermark: rgba(37,99,235,0.03);
+  --card-hover: rgba(37,99,235,0.06);
+  --industry-hover: rgba(37,99,235,0.06);
+  --shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  transition: background 0.4s, color 0.4s;
+}
+
+/* ─── THEME TOGGLE ─── */
+.theme-toggle {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 4px 12px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ─── NAVBAR ─── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 0 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+  background: var(--nav-bg);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  transition: all 0.3s;
+}
+
+.logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 1.5rem;
+  letter-spacing: 0.03em;
+  color: var(--text);
+  text-decoration: none;
+  line-height: 1;
+}
+
+.logo span { color: var(--sky); }
+.logo small {
+  display: block;
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-top: 1px;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.8rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--sky); }
+
+.nav-cta {
+  background: var(--accent);
+  color: #fff !important;
+  padding: 0.45rem 1.1rem;
+  border-radius: 4px;
+  font-weight: 600 !important;
+}
+
+.nav-cta:hover { opacity: 0.85; }
+
+/* ─── HERO ─── */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 100px 5% 60px;
+  background: var(--bg);
+}
+
+.hero-grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+}
+
+[data-theme="dark"] .hero-accent {
+  position: absolute;
+  right: 0; top: 0;
+  width: 50%; height: 100%;
+  background: linear-gradient(135deg, transparent 40%, rgba(37,99,235,0.06) 100%);
+  clip-path: polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+.hero-line {
+  position: absolute;
+  left: 5%; top: 50%;
+  transform: translateY(-50%);
+  width: 3px; height: 200px;
+  background: linear-gradient(to bottom, transparent, var(--sky), transparent);
+  opacity: 0.3;
+}
+
+.hero-content {
+  position: relative;
+  max-width: 800px;
+  animation: fadeUp 0.8s ease both;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(37,99,235,0.12);
+  border: 1px solid rgba(37,99,235,0.25);
+  color: var(--sky);
+  padding: 6px 16px;
+  border-radius: 2px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.hero-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--sky);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(2.8rem, 7vw, 6.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  color: var(--text);
+}
+
+h1 .line-blue { color: var(--sky); display: block; }
+h1 .line-accent {
+  display: block;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--border-accent);
+}
+
+[data-theme="light"] h1 .line-accent {
+  -webkit-text-stroke: 1px rgba(37,99,235,0.25);
+}
+
+.hero-sub {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.hero-sub .dot {
+  width: 4px; height: 4px;
+  background: var(--sky);
+  border-radius: 50%;
+}
+
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  padding: 0.9rem 2rem;
+  border: none;
+  border-radius: 3px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.btn-primary:hover { opacity: 0.85; transform: translateY(-2px); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text);
+  padding: 0.9rem 2rem;
+  border: 1px solid var(--border-accent);
+  border-radius: 3px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 500;
+  font-size: 0.88rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover { border-color: var(--sky); color: var(--sky); }
+
+.hero-stats {
+  display: flex;
+  gap: 3rem;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.stat-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 2.5rem;
+  color: var(--sky);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 4px;
+}
+
+/* ─── SECTIONS ─── */
+section { padding: 100px 5%; }
+
+.section-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--sky);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-label::before {
+  content: '';
+  width: 30px; height: 1px;
+  background: var(--sky);
+  display: block;
+}
+
+.section-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 5vw, 3.8rem);
+  text-transform: uppercase;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.5rem;
+  color: var(--text);
+}
+
+.section-title em { font-style: normal; color: var(--sky); }
+.section-body { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.8; max-width: 600px; }
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-accent), transparent);
+}
+
+/* ─── QUIÉNES SOMOS ─── */
+#quienes {
+  background: var(--bg-mid);
+  position: relative;
+  overflow: hidden;
+}
+
+#quienes::before {
+  content: 'MG';
+  position: absolute;
+  right: 3%; top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 20rem;
+  color: var(--watermark);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.quienes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.mvv-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.mvv-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-accent);
+  border-left: 3px solid var(--accent);
+  padding: 1.5rem;
+  border-radius: 2px;
+}
+
+.mvv-card h4 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--sky);
+  margin-bottom: 0.5rem;
+}
+
+.mvv-card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
+
+.industries { display: flex; flex-direction: column; gap: 1rem; }
+
+.industry-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  transition: all 0.3s;
+}
+
+.industry-item:hover {
+  background: var(--industry-hover);
+  border-color: var(--border-accent);
+  transform: translateX(6px);
+}
+
+.industry-icon {
+  width: 44px; height: 44px;
+  background: rgba(37,99,235,0.12);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.industry-name { font-weight: 600; font-size: 0.95rem; color: var(--text); }
+.industry-desc { font-size: 0.8rem; color: var(--text-secondary); }
+
+/* ─── SERVICIOS ─── */
+#servicios { background: var(--bg); }
+
+.servicios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 3rem;
+}
+
+.servicio-card {
+  background: var(--bg);
+  padding: 2rem;
+  cursor: pointer;
+  transition: background 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.servicio-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 0;
+  background: var(--sky);
+  transition: height 0.3s;
+}
+
+.servicio-card:hover::before,
+.servicio-card.active::before { height: 100%; }
+
+.servicio-card:hover,
+.servicio-card.active { background: var(--card-hover); }
+
+.servicio-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+
+.servicio-card h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+.servicio-card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem; }
+
+.servicio-expandido { display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+.servicio-expandido.open { display: block; }
+
+.servicio-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.8rem; }
+
+.tag {
+  background: rgba(56,189,248,0.1);
+  border: 1px solid rgba(56,189,248,0.2);
+  color: var(--sky);
+  padding: 3px 10px;
+  border-radius: 2px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.servicio-toggle {
+  font-size: 0.72rem;
+  color: var(--sky);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ─── CAPACITACIONES ─── */
+#capacitaciones { background: var(--bg-mid); }
+
+.cap-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.cap-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1.8rem;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.cap-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--sky));
+  transform: scaleX(0);
+  transition: transform 0.3s;
+}
+
+.cap-card:hover { background: var(--card-hover); border-color: var(--border-accent); transform: translateY(-4px); }
+.cap-card:hover::after { transform: scaleX(1); }
+
+.cap-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+
+.cap-card h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+.cap-card p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem; }
+
+.cap-meta { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+.cap-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.7rem;
+  color: var(--sky);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ─── CAMPO ─── */
+#campo { background: var(--bg); position: relative; overflow: hidden; }
+
+.campo-content { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+
+.campo-visual {
+  position: relative;
+  height: 400px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-accent);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.campo-visual::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(0deg, transparent, transparent 39px, var(--grid-color) 39px, var(--grid-color) 40px),
+    repeating-linear-gradient(90deg, transparent, transparent 39px, var(--grid-color) 39px, var(--grid-color) 40px);
+}
+
+.campo-placeholder { text-align: center; position: relative; }
+.campo-placeholder .big-icon { font-size: 5rem; display: block; margin-bottom: 1rem; opacity: 0.4; }
+.campo-placeholder p { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-secondary); }
+
+.coming-badge {
+  position: absolute;
+  top: 1.5rem; right: 1.5rem;
+  background: rgba(234,88,12,0.15);
+  border: 1px solid rgba(234,88,12,0.3);
+  color: #fb923c;
+  padding: 4px 12px;
+  border-radius: 2px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.campo-features { display: flex; flex-direction: column; gap: 1.5rem; }
+
+.campo-feature { display: flex; gap: 1.2rem; align-items: flex-start; }
+
+.campo-feature-icon {
+  width: 48px; height: 48px;
+  background: rgba(37,99,235,0.1);
+  border: 1px solid var(--border-accent);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.campo-feature h4 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.3rem;
+  color: var(--text);
+}
+
+.campo-feature p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
+
+/* ─── EQUIPO ─── */
+#equipo { background: var(--bg-mid); }
+
+.equipo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.equipo-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.equipo-card:hover { border-color: rgba(56,189,248,0.3); transform: translateY(-4px); box-shadow: var(--shadow); }
+
+.equipo-avatar {
+  height: 180px;
+  background: linear-gradient(135deg, rgba(37,99,235,0.15), rgba(13,31,60,0.6));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="light"] .equipo-avatar {
+  background: linear-gradient(135deg, rgba(37,99,235,0.1), rgba(226,232,240,0.8));
+}
+
+.equipo-info { padding: 1.2rem; }
+
+.equipo-info h4 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.2rem;
+  color: var(--text);
+}
+
+.equipo-role { font-size: 0.72rem; color: var(--sky); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+.equipo-cert { font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.5rem; line-height: 1.5; }
+
+/* ─── ALIANZAS ─── */
+#alianzas { background: var(--bg); text-align: center; }
+.alianzas-content { max-width: 700px; margin: 0 auto; }
+
+.alianzas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+  text-align: left;
+}
+
+.alianza-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-accent);
+  border-radius: 4px;
+  padding: 2rem;
+  transition: all 0.3s;
+}
+
+.alianza-card:hover { background: var(--card-hover); border-color: rgba(37,99,235,0.3); }
+
+.alianza-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+
+.alianza-card h4 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+.alianza-card p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6; }
+
+/* ─── CONTACTO ─── */
+#contacto { background: var(--bg-mid); }
+
+.contacto-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: start; }
+
+.contacto-info { display: flex; flex-direction: column; gap: 1.5rem; }
+
+.contact-item { display: flex; gap: 1rem; align-items: flex-start; }
+
+.contact-icon {
+  width: 44px; height: 44px;
+  background: rgba(37,99,235,0.12);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.contact-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sky); margin-bottom: 3px; }
+.contact-value { font-size: 0.92rem; color: var(--text-light); line-height: 1.6; }
+
+.qr-box {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.qr-box canvas, .qr-box img { border-radius: 4px; }
+
+.qr-info { }
+.qr-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sky); margin-bottom: 0.3rem; }
+.qr-desc { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; }
+
+.form-group { margin-bottom: 1.2rem; }
+
+.form-group label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 0.85rem 1rem;
+  color: var(--text);
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.92rem;
+  transition: border-color 0.2s;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus { border-color: var(--accent); }
+
+.form-group select option { background: var(--bg-mid); color: var(--text); }
+.form-group textarea { resize: vertical; min-height: 120px; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--footer-bg);
+  border-top: 1px solid var(--border);
+  padding: 3rem 5%;
+}
+
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); margin-bottom: 2rem; }
+
+.footer-logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.6rem; color: #f8fafc; margin-bottom: 0.8rem; }
+.footer-logo span { color: #38bdf8; }
+
+.footer-desc { font-size: 0.85rem; color: #94a3b8; line-height: 1.7; max-width: 300px; }
+
+.footer-col h5 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #38bdf8;
+  margin-bottom: 1rem;
+}
+
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 0.5rem; }
+.footer-col ul li a { color: #94a3b8; text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+.footer-col ul li a:hover { color: #f8fafc; }
+
+.footer-social { display: flex; gap: 0.8rem; margin-top: 1rem; }
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #94a3b8;
+  padding: 6px 12px;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.social-btn:hover { border-color: #38bdf8; color: #38bdf8; }
+
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+.footer-copy { font-size: 0.78rem; color: #94a3b8; }
+.footer-tagline { font-size: 0.75rem; color: #94a3b8; font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* ─── WHATSAPP ─── */
+.whatsapp-btn {
+  position: fixed;
+  bottom: 2rem; right: 2rem;
+  z-index: 99;
+  width: 58px; height: 58px;
+  background: #25d366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+  text-decoration: none;
+  transition: all 0.3s;
+  animation: bounceIn 1s ease 1.5s both;
+}
+
+.whatsapp-btn:hover { transform: scale(1.1); box-shadow: 0 6px 30px rgba(37,211,102,0.6); }
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+@keyframes bounceIn { from { opacity: 0; transform: scale(0.3); } to { opacity: 1; transform: scale(1); } }
+
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .quienes-grid, .campo-content, .contacto-grid, .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .mvv-grid, .form-row { grid-template-columns: 1fr; }
+  .hero-stats { gap: 1.5rem; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .qr-box { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">
+    MG<span>.</span>
+    <small>Servicios Emergencias Integrales</small>
+  </a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#quienes">Nosotros</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#capacitaciones">Capacitaciones</a></li>
+      <li><a href="#equipo">Equipo</a></li>
+      <li><a href="#alianzas">Alianzas</a></li>
+      <li><a href="#contacto" class="nav-cta">Contacto</a></li>
+    </ul>
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">☀️ Claro</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-accent"></div>
+  <div class="hero-line"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Rincón de los Sauces · Neuquén</div>
+    <h1>
+      <span>Emergencias</span>
+      <span class="line-blue">Integrales</span>
+      <span class="line-accent">Neuquén</span>
+    </h1>
+    <div class="hero-sub">
+      <span><span class="dot"></span> Salud Ocupacional</span>
+      <span><span class="dot"></span> Prevención</span>
+      <span><span class="dot"></span> Respuesta Operativa</span>
+    </div>
+    <div class="hero-btns">
+      <a href="#contacto" class="btn-primary">Solicitar asesoramiento →</a>
+      <a href="#servicios" class="btn-secondary">Conocer servicios</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">5+</div>
+        <div class="stat-label">Profesionales certificados</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Servicios especializados</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Cuencas con cobertura</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">24h</div>
+        <div class="stat-label">Respuesta operativa</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- QUIÉNES SOMOS -->
+<section id="quienes">
+  <div class="quienes-grid">
+    <div class="reveal">
+      <div class="section-label">Presentación corporativa</div>
+      <h2 class="section-title">Operamos donde <em>más importa</em></h2>
+      <p class="section-body">MG Servicios Emergencias Integrales es una empresa especializada en seguridad, salud ocupacional y respuesta ante emergencias para la industria oil & gas en la cuenca neuquina. Trabajamos con profesionales activos, habilitados y con experiencia real de campo.</p>
+      <div class="mvv-grid">
+        <div class="mvv-card">
+          <h4>Misión</h4>
+          <p>Proteger la integridad de las personas y las operaciones mediante servicios de prevención y respuesta de alto nivel.</p>
+        </div>
+        <div class="mvv-card">
+          <h4>Visión</h4>
+          <p>Ser la empresa de referencia en seguridad integral de la cuenca neuquina, con proyección regional.</p>
+        </div>
+        <div class="mvv-card">
+          <h4>Compromiso</h4>
+          <p>Cumplimiento normativo absoluto, respuesta rápida y profesionales certificados en cada servicio.</p>
+        </div>
+        <div class="mvv-card">
+          <h4>Cobertura</h4>
+          <p>Rincón de los Sauces, Añelo y toda la cuenca neuquina. Presencia local, capacidad operativa real.</p>
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="industries">
+        <div class="industry-item">
+          <div class="industry-icon">🛢️</div>
+          <div>
+            <div class="industry-name">Oil & Gas</div>
+            <div class="industry-desc">Empresas petroleras y gasíferas de la cuenca</div>
+          </div>
+        </div>
+        <div class="industry-item">
+          <div class="industry-icon">⚡</div>
+          <div>
+            <div class="industry-name">Energía</div>
+            <div class="industry-desc">Sector energético e infraestructura crítica</div>
+          </div>
+        </div>
+        <div class="industry-item">
+          <div class="industry-icon">🏗️</div>
+          <div>
+            <div class="industry-name">Construcción industrial</div>
+            <div class="industry-desc">Obras civiles e instalaciones de alto riesgo</div>
+          </div>
+        </div>
+        <div class="industry-item">
+          <div class="industry-icon">🚛</div>
+          <div>
+            <div class="industry-name">Logística y transporte</div>
+            <div class="industry-desc">Empresas de servicios y soporte a la industria</div>
+          </div>
+        </div>
+        <div class="industry-item">
+          <div class="industry-icon">🏭</div>
+          <div>
+            <div class="industry-name">Industria general</div>
+            <div class="industry-desc">Cualquier empresa con obligaciones de seguridad laboral</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="reveal">
+    <div class="section-label">Lo que hacemos</div>
+    <h2 class="section-title">Servicios <em>especializados</em></h2>
+    <p class="section-body">Cuatro líneas de servicio diseñadas para cubrir las exigencias normativas y operativas de la industria oil & gas.</p>
+  </div>
+  <div class="servicios-grid reveal">
+    <div class="servicio-card" onclick="toggleServicio(this)">
+      <span class="servicio-icon">🧪</span>
+      <h3>Testeo de alcohol y drogas</h3>
+      <p>Detección rápida y confiable en planta con paneles de 2, 4, 6 y 10 sustancias.</p>
+      <div class="servicio-toggle">Ver más ↓</div>
+      <div class="servicio-expandido">
+        <p style="font-size:0.82rem;line-height:1.7;margin-bottom:0.8rem;color:var(--text-secondary)">Realizamos testeos con equipamiento certificado, personal capacitado y resultados inmediatos. Cumplimiento total con la legislación vigente en higiene y seguridad laboral.</p>
+        <div class="servicio-tags">
+          <span class="tag">Panel 2</span>
+          <span class="tag">Panel 4</span>
+          <span class="tag">Panel 6</span>
+          <span class="tag">Panel 10</span>
+          <span class="tag">In company</span>
+          <span class="tag">Resultado inmediato</span>
+        </div>
+      </div>
+    </div>
+    <div class="servicio-card" onclick="toggleServicio(this)">
+      <span class="servicio-icon">🎓</span>
+      <h3>Capacitaciones industriales</h3>
+      <p>Formación a cargo de profesionales activos: bomberos, enfermeras y especialistas.</p>
+      <div class="servicio-toggle">Ver más ↓</div>
+      <div class="servicio-expandido">
+        <p style="font-size:0.82rem;line-height:1.7;margin-bottom:0.8rem;color:var(--text-secondary)">Capacitaciones in company, adaptadas a las exigencias del sector. Dictadas por profesionales con habilitación vigente y experiencia operativa real.</p>
+        <div class="servicio-tags">
+          <span class="tag">Presencial</span>
+          <span class="tag">In company</span>
+          <span class="tag">Certificación</span>
+          <span class="tag">A medida</span>
+        </div>
+      </div>
+    </div>
+    <div class="servicio-card" onclick="toggleServicio(this)">
+      <span class="servicio-icon">🚒</span>
+      <h3>Guardia de bomberos</h3>
+      <p>Prevención contra incendios con bomberos capacitados. Alianza Cuartel 16 y Blackfire.</p>
+      <div class="servicio-toggle">Ver más ↓</div>
+      <div class="servicio-expandido">
+        <p style="font-size:0.82rem;line-height:1.7;margin-bottom:0.8rem;color:var(--text-secondary)">Servicio de guardia para prevención de incendios en operaciones industriales. Cobertura en Rincón de los Sauces y Añelo, con bomberos certificados y equipamiento propio.</p>
+        <div class="servicio-tags">
+          <span class="tag">Cuartel 16</span>
+          <span class="tag">Blackfire Añelo</span>
+          <span class="tag">Cobertura 24hs</span>
+          <span class="tag">Equipo propio</span>
+        </div>
+      </div>
+    </div>
+    <div class="servicio-card" onclick="toggleServicio(this)">
+      <span class="servicio-icon">🩺</span>
+      <h3>Enfermería laboral</h3>
+      <p>Atención sanitaria en planta. Guardias, emergencias y salud ocupacional.</p>
+      <div class="servicio-toggle">Ver más ↓</div>
+      <div class="servicio-expandido">
+        <p style="font-size:0.82rem;line-height:1.7;margin-bottom:0.8rem;color:var(--text-secondary)">Enfermeras matriculadas disponibles para cubrir guardias, atender emergencias y realizar seguimiento de salud ocupacional en las instalaciones del cliente.</p>
+        <div class="servicio-tags">
+          <span class="tag">Guardias</span>
+          <span class="tag">Emergencias</span>
+          <span class="tag">Salud ocupacional</span>
+          <span class="tag">Matrícula vigente</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CAPACITACIONES -->
+<section id="capacitaciones">
+  <div class="reveal">
+    <div class="section-label">Formación especializada</div>
+    <h2 class="section-title">Capacitaciones <em>certificadas</em></h2>
+    <p class="section-body">Dictadas por profesionales activos con habilitación vigente. Modalidad presencial e in company, con certificación incluida.</p>
+  </div>
+  <div class="cap-grid reveal">
+    <div class="cap-card"><span class="cap-icon">❤️</span><h3>RCP y primeros auxilios</h3><p>Reanimación cardiopulmonar y atención inicial de emergencias médicas en entornos industriales.</p><div class="cap-meta"><span class="cap-meta-item">⏱ 4-8hs</span><span class="cap-meta-item">📜 Certifica</span></div></div>
+    <div class="cap-card"><span class="cap-icon">🔥</span><h3>Uso de extintores</h3><p>Identificación, manejo y aplicación correcta de extintores según tipo de fuego y normativa vigente.</p><div class="cap-meta"><span class="cap-meta-item">⏱ 2-4hs</span><span class="cap-meta-item">📜 Certifica</span></div></div>
+    <div class="cap-card"><span class="cap-icon">🦺</span><h3>Brigadistas industriales</h3><p>Formación completa de brigadas de emergencia: roles, protocolos, equipamiento y respuesta coordinada.</p><div class="cap-meta"><span class="cap-meta-item">⏱ 16-24hs</span><span class="cap-meta-item">📜 Certifica</span></div></div>
+    <div class="cap-card"><span class="cap-icon">🚪</span><h3>Evacuación</h3><p>Planificación y ejecución de planes de evacuación. Roles, puntos de encuentro y comunicación de emergencia.</p><div class="cap-meta"><span class="cap-meta-item">⏱ 4hs</span><span class="cap-meta-item">📜 Certifica</span></div></div>
+    <div class="cap-card"><span class="cap-icon">⬛</span><h3>Espacios confinados</h3><p>Protocolos de entrada, trabajo seguro y rescate en espacios confinados según normativa vigente.</p><div class="cap-meta"><span class="cap-meta-item">⏱ 8hs</span><span class="cap-meta-item">📜 Certifica</span></div></div>
+    <div class="cap-card"><span class="cap-icon">🏭</span><h3>Incendios industriales</h3><p>Teoría del fuego, técnicas de extinción y manejo de incendios en instalaciones de alto riesgo.</p><div class="cap-meta"><span class="cap-meta-item">⏱ 8-16hs</span><span class="cap-meta-item">📜 Certifica</span></div></div>
+    <div class="cap-card"><span class="cap-icon">🔍</span><h3>Rescate industrial</h3><p>Técnicas de rescate en altura, vehículos y estructuras. Manejo de equipamiento especializado.</p><div class="cap-meta"><span class="cap-meta-item">⏱ 16hs</span><span class="cap-meta-item">📜 Certifica</span></div></div>
+    <div class="cap-card"><span class="cap-icon">⚠️</span><h3>Seguridad operativa</h3><p>Cultura de seguridad, identificación de riesgos, EPP y procedimientos seguros en operaciones diarias.</p><div class="cap-meta"><span class="cap-meta-item">⏱ 4-8hs</span><span class="cap-meta-item">📜 Certifica</span></div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CAMPO DE ENTRENAMIENTO -->
+<section id="campo">
+  <div class="campo-content">
+    <div class="campo-visual reveal">
+      <div class="coming-badge">En desarrollo</div>
+      <div class="campo-placeholder">
+        <span class="big-icon">🏟️</span>
+        <p>Centro de entrenamiento<br>industrial MG</p>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="section-label">Proyección estratégica</div>
+      <h2 class="section-title">Campo de <em>entrenamiento</em></h2>
+      <p class="section-body" style="margin-bottom:2rem">Un centro de entrenamiento industrial de primer nivel para la formación de brigadistas, bomberos y equipos de emergencia de toda la cuenca.</p>
+      <div class="campo-features">
+        <div class="campo-feature">
+          <div class="campo-feature-icon">🔥</div>
+          <div><h4>Simulacros reales</h4><p>Instalaciones para entrenamientos con fuego real, humo y condiciones de emergencia controladas.</p></div>
+        </div>
+        <div class="campo-feature">
+          <div class="campo-feature-icon">🎓</div>
+          <div><h4>Formación continua</h4><p>Capacitaciones periódicas para empresas de la cuenca, con instructores certificados.</p></div>
+        </div>
+        <div class="campo-feature">
+          <div class="campo-feature-icon">🤝</div>
+          <div><h4>Alianzas institucionales</h4><p>En asociación con Cuartel 16 de Rincón y Blackfire de Añelo, con campo propio disponible.</p></div>
+        </div>
+        <div class="campo-feature">
+          <div class="campo-feature-icon">🏆</div>
+          <div><h4>Profesionalización regional</h4><p>Objetivo: elevar el estándar de seguridad operativa en toda la cuenca neuquina.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EQUIPO -->
+<section id="equipo">
+  <div class="reveal" style="text-align:center;margin-bottom:1rem">
+    <div class="section-label" style="justify-content:center">Profesionales</div>
+    <h2 class="section-title">Nuestro <em>equipo</em></h2>
+    <p class="section-body" style="margin:0 auto">Trabajamos con profesionales activos. Cada integrante tiene habilitación vigente y experiencia de campo.</p>
+  </div>
+  <div class="equipo-grid reveal">
+    <div class="equipo-card">
+      <div class="equipo-avatar">👩‍⚕️</div>
+      <div class="equipo-info">
+        <h4>Natalia Barrera</h4>
+        <div class="equipo-role">Fundadora · Instructora en Socorrismo</div>
+        <div class="equipo-cert">Habilitación vigente · Capacitaciones y primeros auxilios</div>
+      </div>
+    </div>
+    <div class="equipo-card">
+      <div class="equipo-avatar">🧑‍💼</div>
+      <div class="equipo-info">
+        <h4>Lautaro Navarrete</h4>
+        <div class="equipo-role">Co-Fundador</div>
+        <div class="equipo-cert">Dirección estratégica y desarrollo comercial</div>
+      </div>
+    </div>
+    <div class="equipo-card">
+      <div class="equipo-avatar">🩺</div>
+      <div class="equipo-info">
+        <h4>Jessica Moreira</h4>
+        <div class="equipo-role">Responsable de Enfermería</div>
+        <div class="equipo-cert">Atención prehospitalaria · Matrícula vigente</div>
+      </div>
+    </div>
+    <div class="equipo-card">
+      <div class="equipo-avatar">👩‍💼</div>
+      <div class="equipo-info">
+        <h4>Débora Seguel</h4>
+        <div class="equipo-role">Gestión Administrativa y RRHH</div>
+        <div class="equipo-cert">Recursos humanos · Administración operativa</div>
+      </div>
+    </div>
+    <div class="equipo-card">
+      <div class="equipo-avatar">🧠</div>
+      <div class="equipo-info">
+        <h4>Giuliana Visuara</h4>
+        <div class="equipo-role">Psicóloga Laboral</div>
+        <div class="equipo-cert">Psicología organizacional · Matrícula vigente</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ALIANZAS -->
+<section id="alianzas">
+  <div class="alianzas-content reveal">
+    <div class="section-label" style="justify-content:center">Respaldo institucional</div>
+    <h2 class="section-title">Alianzas <em>estratégicas</em></h2>
+    <p class="section-body" style="margin:0 auto">Operamos en red con instituciones clave de la cuenca. Recursos reales, no promesas.</p>
+  </div>
+  <div class="alianzas-grid reveal">
+    <div class="alianza-card">
+      <span class="alianza-icon">🚒</span>
+      <h4>Cuartel 16 — Rincón de los Sauces</h4>
+      <p>Alianza operativa para guardias de bomberos, capacitaciones y uso del campo de entrenamiento. Generamos ingresos al cuartel y cobertura para las empresas.</p>
+    </div>
+    <div class="alianza-card">
+      <span class="alianza-icon">🔥</span>
+      <h4>Blackfire — Añelo</h4>
+      <p>Empresa aliada con bomberos capacitados en Añelo. Cobertura operativa en toda la cuenca sin depender de un solo punto geográfico.</p>
+    </div>
+    <div class="alianza-card">
+      <span class="alianza-icon">🏭</span>
+      <h4>Industria Oil & Gas</h4>
+      <p>Contacto activo con las principales operadoras de la cuenca neuquina. Proceso de vinculación comercial en curso.</p>
+    </div>
+    <div class="alianza-card">
+      <span class="alianza-icon">📋</span>
+      <h4>Campo de entrenamiento compartido</h4>
+      <p>Acuerdo en proceso con Cuartel 16 y Blackfire para uso del campo disponible en la zona. Base del futuro centro de entrenamiento regional.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="contacto-grid">
+    <div class="reveal">
+      <div class="section-label">Contacto</div>
+      <h2 class="section-title">Hablemos <em>ahora</em></h2>
+      <p class="section-body" style="margin-bottom:2rem">Contanos qué servicio necesitás. Te respondemos en menos de 24 horas.</p>
+      <div class="contacto-info">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-label">Ubicación</div>
+            <div class="contact-value">Rincón de los Sauces, Neuquén<br>Cobertura: Rincón · Añelo · Cuenca</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📱</div>
+          <div>
+            <div class="contact-label">WhatsApp</div>
+            <div class="contact-value"><a href="https://wa.me/542994520966" target="_blank" style="color:var(--sky);text-decoration:none">+54 299 452-0966</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📸</div>
+          <div>
+            <div class="contact-label">Instagram</div>
+            <div class="contact-value"><a href="https://instagram.com/mg.servicios.integrales" target="_blank" style="color:var(--sky);text-decoration:none">@mg.servicios.integrales</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <div class="contact-label">Disponibilidad</div>
+            <div class="contact-value">Lunes a viernes · 8:00 – 18:00<br>Guardias: disponibilidad a convenir</div>
+          </div>
+        </div>
+      </div>
+      <div class="qr-box">
+        <div id="qrcode"></div>
+        <div class="qr-info">
+          <div class="qr-label">WhatsApp directo</div>
+          <div class="qr-desc">Escaneá el código con tu cámara para escribirnos por WhatsApp al instante.</div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nombre completo</label>
+          <input type="text" placeholder="Juan García">
+        </div>
+        <div class="form-group">
+          <label>Empresa</label>
+          <input type="text" placeholder="Tecpetrol S.A.">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Servicio que necesitás</label>
+        <select>
+          <option value="">Seleccioná un servicio</option>
+          <option>Testeo de alcohol y drogas</option>
+          <option>Capacitaciones industriales</option>
+          <option>Guardia de bomberos</option>
+          <option>Enfermería laboral</option>
+          <option>Varios servicios / Consulta general</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Mensaje</label>
+        <textarea placeholder="Contanos brevemente qué necesitás y cuándo..."></textarea>
+      </div>
+      <a href="https://wa.me/542994520966" target="_blank" class="btn-primary" style="width:100%;justify-content:center;display:flex">Enviar consulta por WhatsApp →</a>
+      <p style="font-size:0.75rem;color:var(--text-secondary);margin-top:1rem;text-align:center">También podés escribirnos directo o seguirnos en Instagram</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">MG<span>.</span></div>
+      <p class="footer-desc">Salud ocupacional, prevención de riesgos y respuesta ante emergencias para la industria oil & gas en la cuenca neuquina.</p>
+      <div class="footer-social">
+        <a href="https://wa.me/542994520966" target="_blank" class="social-btn">💬 WhatsApp</a>
+        <a href="https://instagram.com/mg.servicios.integrales" target="_blank" class="social-btn">📸 Instagram</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Servicios</h5>
+      <ul>
+        <li><a href="#servicios">Testeo alcohol y drogas</a></li>
+        <li><a href="#servicios">Capacitaciones</a></li>
+        <li><a href="#servicios">Guardia de bomberos</a></li>
+        <li><a href="#servicios">Enfermería laboral</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Empresa</h5>
+      <ul>
+        <li><a href="#quienes">Quiénes somos</a></li>
+        <li><a href="#equipo">Nuestro equipo</a></li>
+        <li><a href="#alianzas">Alianzas</a></li>
+        <li><a href="#campo">Campo de entrenamiento</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 MG Servicios Emergencias Integrales · Rincón de los Sauces, Neuquén</div>
+    <div class="footer-tagline">Seguridad cuando más importa</div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOTANTE -->
+<a href="https://wa.me/542994520966" target="_blank" class="whatsapp-btn" title="WhatsApp MG">💬</a>
+
+<script>
+// QR Code
+window.addEventListener('load', function() {
+  new QRCode(document.getElementById("qrcode"), {
+    text: "https://wa.me/542994520966",
+    width: 100,
+    height: 100,
+    colorDark: "#2563eb",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.H
+  });
+});
+
+// Modo claro/oscuro
+function toggleTheme() {
+  const html = document.documentElement;
+  const btn = document.getElementById('themeBtn');
+  if (html.getAttribute('data-theme') === 'dark') {
+    html.setAttribute('data-theme', 'light');
+    btn.textContent = '🌙 Oscuro';
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    btn.textContent = '☀️ Claro';
+  }
+}
+
+// Acordeón servicios
+function toggleServicio(card) {
+  const exp = card.querySelector('.servicio-expandido');
+  const toggle = card.querySelector('.servicio-toggle');
+  const isOpen = exp.classList.contains('open');
+  document.querySelectorAll('.servicio-expandido.open').forEach(e => {
+    e.classList.remove('open');
+    e.closest('.servicio-card').classList.remove('active');
+    e.closest('.servicio-card').querySelector('.servicio-toggle').textContent = 'Ver más ↓';
+  });
+  if (!isOpen) {
+    exp.classList.add('open');
+    card.classList.add('active');
+    toggle.textContent = 'Cerrar ↑';
+  }
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Navbar scroll
+window.addEventListener('scroll', () => {
+  document.querySelector('nav').style.background =
+    window.scrollY > 50 ? 'var(--nav-bg)' : 'var(--nav-bg)';
+});
+</script>
+</body>
+</html>
